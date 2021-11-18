@@ -1,17 +1,21 @@
+// Création d'un server Node utilisant les instructions comprises dans le fichier app.js.
 const http = require('http');
 const app = require('./app');
+const server = http.createServer(app);
 
+// Vérification de la validité du port.
 const normalizePort = val => {
     const port = parseInt(val, 10);
-
-    if (isNaN(port)) {
+    if(isNaN(port)){
     return val;
     }
-    if (port >= 0) {
+    if(port >= 0){
     return port;
     }
     return false;
 };
+
+// Recherche d'erreur et correction.
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -35,13 +39,11 @@ const errorHandler = error => {
     }
 };
 
-const server = http.createServer(app);
-
+// Consignation du port ou du canal nommé sur lequel le serveur s'execute dans la console.
 server.on('error', errorHandler);
 server.on('listening', () => {
     const address = server.address();
     const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
     console.log('Listening on ' + bind);
 });
-
 server.listen(port);
