@@ -1,4 +1,4 @@
-// Création d'un server Node utilisant les instructions comprises dans le fichier app.js.
+// Création d'un server Node et importation de app.js.
 const http = require('http');
 const app = require('./app');
 const server = http.createServer(app);
