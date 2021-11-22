@@ -1,6 +1,7 @@
 // Importation d'Express.
 const express = require('express');
 const app = express();
+const path = require('path');
 
 // Importation des routes.
 const stuffRoutes = require('./routes/stuff');
@@ -17,6 +18,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));   // Route vers l'image contenue dans la requête.
 
 // Connection à Mongoose.
 const mongoose = require('mongoose');

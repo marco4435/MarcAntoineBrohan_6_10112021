@@ -17,9 +17,11 @@ exports.getOneThing = (req, res, next) => {
 
 // Fonction createThing permettant la création d'un article.
 exports.createThing = (req, res, next) => {
-    delete req.body._id;
-    const thing = new Thing({
-        ...req.body
+    const thingObject = JSON.parse(req.body.thing); // Convertion en object javascript du contenu de la requête.
+    delete thingObject._id;                         // Retrait de l'ID.
+    const thing = new Thing({                       // Retrait de l'ID.
+        ...thingObject,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  // Obtention de l'url de l'image.
     });
     thing.save()
         .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
