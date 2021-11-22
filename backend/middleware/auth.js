@@ -1,7 +1,7 @@
 // Importation de JWT.
 const jwt = require('jsonwebtoken');
 
-// Importation de JWT.
+// Fonction vérifiant l'authentification de l'utilisateur avant envoi de la requête.
 module.exports = (req, res, next) => {
     try{
         const token = req.headers.authorization.split(' ')[1];          // Récupération du token de la requête entrante.
