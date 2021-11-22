@@ -1,3 +1,4 @@
+// Importation d'Express.
 const express = require('express');
 const stuffCtrl = require('../controllers/stuff');
 const auth = require('../middleware/auth');
@@ -5,7 +6,7 @@ const auth = require('../middleware/auth');
 // Création d'un routeur.
 const router = express.Router();
 
-// Configuration de routes get, post, put, delete.
+// Paramétrage des routes.
 router.get('/:id', auth, stuffCtrl.getAllThings)
 router.get('/:id', auth, stuffCtrl.getOneThing)
 router.post('/', auth, stuffCtrl.createThing)
