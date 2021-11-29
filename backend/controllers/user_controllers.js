@@ -4,9 +4,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// EN -- Middleware & Models importation. FR -- Importation des Middleware et des Modèles.
+// EN -- Middleware & Models & Constant importation. FR -- Importation des Middleware, des Modèles et des constantes.
 const passwordSchema = require("../middleware/password");
 const User = require('../models/user_models');
+const token_password = require('./hidden');
 
 /*----------------------------------CONTROLLERS----------------------------------*/
 
@@ -48,7 +49,7 @@ exports.login = (req, res, next) => {
                 userId: user._id,
                 token: jwt.sign(
                 { userId: user._id },
-                'MON TOKEN INTROUVABLE',               
+                token_password,               
                 { expiresIn: '24h' }
             )
             });

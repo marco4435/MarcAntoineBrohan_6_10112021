@@ -9,7 +9,7 @@ const path = require('path');                     // Donne accès aux fichiers e
 // EN -- Routes parameters import. FR -- Importation des paramètres des routes.
 const sauceRoutes = require('./routes/sauce_routes');
 const userRoutes = require('./routes/user_routes');
-const key_mongoose = require('./middleware/key_mongoose');
+const key_mongoose = require('./hidden');
 
 /*----------------------------------CONNECTION----------------------------------*/
 
