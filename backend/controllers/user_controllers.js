@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 // EN -- Middleware & Models & Constant importation. FR -- Importation des Middleware, des Modèles et des constantes.
 const passwordSchema = require("../middleware/password");
 const User = require('../models/user_models');
-const token_password = require('./hidden');
+const token_password = require('../hidden');
 
 /*----------------------------------CONTROLLERS----------------------------------*/
 

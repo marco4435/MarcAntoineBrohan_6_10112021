@@ -4,7 +4,7 @@
 const jwt = require('jsonwebtoken');
 
 // EN -- Import of a constant. FR -- Importation d'une constante.
-const token_password = require('./hidden');
+const token_password = require('../hidden');
 
 /*----------------------------------MIDDLEWARE----------------------------------*/
 
