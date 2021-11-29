@@ -21,14 +21,14 @@ exports.signup = (req, res, next) => {
                 password: hash
         });
         user.save()                          // Enregistrement dans la base de données.
-            .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-            .catch(error => res.status(400).json({ error }));
+            .then(() => res.status(201).json({ message: 'Utilisateur créé.' }))   // 201 = Requête traitée avec succès et création d'un document.
+            .catch(error => res.status(400).json({ error }));                     // 400 = Syntaxe de la requête érronée.
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error }));                         // 500 = Erreur serveur.
     }
     else{
         let errorMessage = "Le mot de passe doit comporter au minimum 5 caractères, 1 majuscule, 1 minuscule, 2 chiffres et ne pas comporter d'espace."
-        return res.status(400).json({ error: new Error(errorMessage)});
+        return res.status(400).json({ error: new Error(errorMessage)});   // 400 = Syntaxe de la requête érronée.
     }
 }
 
@@ -37,12 +37,12 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })                // Recherche dans la base de données d'un email identique à celui de la requête.
         .then(user => {
             if (!user) {                                   // Erreur si aucun email identique n'est trouvé.
-                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+                return res.status(401).json({ error: 'Utilisateur non trouvé.' });   // Une authentification est nécessaire pour accéder à la ressource.
             }
     bcrypt.compare(req.body.password, user.password)       // Recherche dans la base de données d'un mot de passe identique à celui de la requête.
         .then(valid => {
             if (!valid) {                                  // Erreur si aucun mot de passe identique n'est trouvé.
-                return res.status(401).json({ error: 'Mot de passe incorrect !' });
+                return res.status(401).json({ error: 'Mot de passe incorrect.' });   // Une authentification est nécessaire pour accéder à la ressource.
             }
             res.status(200).json({                         // Réponse à la requête contenant l'ID utilisateur et un token.
                 userId: user._id,
@@ -53,7 +53,7 @@ exports.login = (req, res, next) => {
             )
             });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error }));  // 500 = Erreur serveur.
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error }));      // 500 = Erreur serveur.
 };

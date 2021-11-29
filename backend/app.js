@@ -9,11 +9,12 @@ const path = require('path');                     // Donne accès aux fichiers e
 // EN -- Routes parameters import. FR -- Importation des paramètres des routes.
 const sauceRoutes = require('./routes/sauce_routes');
 const userRoutes = require('./routes/user_routes');
+const key_mongoose = require('./middleware/key_mongoose');
 
 /*----------------------------------CONNECTION----------------------------------*/
 
 // EN -- Mongoose connection. FR -- Connexion à Mongoose.
-mongoose.connect('mongodb+srv://marco4435:Y9YfpNw1roIIsl43@cluster0.dyfzt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(key_mongoose,
     { useNewUrlParser: true,   // Fichier ENV à mettre dans le gitignore.
     useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))

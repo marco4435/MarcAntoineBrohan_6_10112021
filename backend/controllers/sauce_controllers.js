@@ -20,51 +20,48 @@ exports.createSauce = (req, res, next) => {
 		imageUrl: `${req.protocol}://${req.get("host")}/images/${ req.file.filename }`  // Obtention de l'URL de l'image.
 	});
 	sauce.save()     								 // Enregistrement dans la base de données.
-		.then(() => res.status(201).json({ message: "Objet enregistré." }))  			// 200 = Requête traitée avec succès et création d'un document.
+		.then(() => res.status(201).json({ message: "Objet enregistré." }))  			// 201 = Requête traitée avec succès et création d'un document.
 		.catch((error) => res.status(400).json({ error }));								// 400 = Syntaxe de la requête érronée.
 };
 
 // EN -- Appreciation(like/dislike) sauce function. FR -- Fonction permettant l'appréciation(like/dislike) d'une sauce.
+// POST - Receive : { sauce: String, like: Number } - Send : { message: String }
 exports.likeSauce = (req, res, next) => {
-	Sauce.findOne({ _id: req.params.id })
+	Sauce.findOne({ _id: req.params.id })				// Recherche dans la base de données de la sauce sélectionnée grâce à son _ID.
 		.then((sauce) => {
-			//variables
 			let userId = req.body.userId;
 			let sauceId = req.params.id;
 			let like = req.body.like;
-			// Array with the users depending on their choice
-			let arrayLikers = sauce.usersLiked;
+			let arrayLikers = sauce.usersLiked;							   // Tableaux comprenants les likes et dislikes.
 			let arrayDislikers = sauce.usersDisliked;
-			// Return true if the user liked or disliked before, else it return false.
-			let userResetLike =!! arrayLikers.find((e) => e === userId );
+			let userResetLike =!! arrayLikers.find((e) => e === userId );  // Renvoi vrai si l'utilisateur avait liké ou dislike précédement. Renvoi faux sinon.
 			let userResetDislike =!! arrayDislikers.find((e) => e === userId );
-	        //conditions : 1 = like, -1 = dislike, 0 = change from like of dislike to nothing.
-			if(like === 1) {
-					Sauce.updateOne( { _id : sauceId }, { $inc: { likes: +1 }, $push: { usersLiked : userId }, } )
-						.then(() =>	{ res.status(200).json({ message: "liked successfully!" })})
-						.catch((error) => res.status(400).json({ error }));
+			if(like === 1) {    		 // L'utilisateur ajoute un like.
+					Sauce.updateOne( { _id : sauceId }, { $inc: { likes: +1 }, $push: { usersLiked : userId }, } )   // 1er argument : Recherche de l'ID de la sauce parmis tous les ID de sauces. 2ème argument : Incrémentation de la variable Likes + Ajout de l'ID de l'utilisateur au tableau comprenant l'ID de tous les utilisateurs qui ont liké. 
+						.then(() =>	{ res.status(200).json({ message: "Like pris en compte" })})     		 // 200 = Requête traitée avec succès.
+						.catch((error) => res.status(400).json({ error }));						     		 // 400 = Syntaxe de la requête érronée.
 				}
 				
-			if(like === -1) {
-					Sauce.updateOne( { _id : sauceId }, { $inc: { dislikes: +1 }, $push: { usersDisliked : userId }, } )
-						.then(() =>	{ res.status(200).json({ message: "disliked successfully!" })})
-						.catch((error) => res.status(400).json({ error }));
+			if(like === -1) {   		 // L'utilisateur ajoute un dislike.
+					Sauce.updateOne( { _id : sauceId }, { $inc: { dislikes: +1 }, $push: { usersDisliked : userId }, } )  // 1er argument : Recherche de l'ID de la sauce parmis tous les ID de sauces. 2ème argument : Incrémentation de la variable Likes + Ajout de l'ID de l'utilisateur au tableau comprenant l'ID de tous les utilisateurs qui ont disliké. 
+						.then(() =>	{ res.status(200).json({ message: "Dislike pris en compte" })})  		 // 200 = Requête traitée avec succès.
+						.catch((error) => res.status(400).json({ error }));  						 		 // 400 = Syntaxe de la requête érronée.
 			}
 
-			if(like === 0) {
-				if(userResetLike) {
-						Sauce.updateOne( { _id : sauceId }, { $inc: { likes: -1 }, $pull: { usersLiked : userId } ,} )
-						.then(() =>	{ res.status(200).json({ message: "cancel successfully!" })})
-						.catch((error) => res.status(400).json({ error }));
+			if(like === 0) {             // L'utilisateur annule son like ou son dislike.
+				if(userResetLike) {		 // Si l'utilisateur avait déjà liké.									
+					Sauce.updateOne( { _id : sauceId }, { $inc: { likes: -1 }, $pull: { usersLiked : userId } ,} )
+					.then(() =>	{ res.status(200).json({ message: "Retrait du like pris en compte" })})  	 // 200 = Requête traitée avec succès.
+					.catch((error) => res.status(400).json({ error }));  								 	 // 400 = Syntaxe de la requête érronée.
 				}
-				if(userResetDislike) {
+				if(userResetDislike) {	 // Si l'utilisateur avait déjà disliké.									
 					Sauce.updateOne( { _id : sauceId }, { $inc: { dislikes: -1 }, $pull: { usersDisliked : userId }, } )
-					.then(() =>	{ res.status(200).json({ message: "cancel successfully!" })})
-					.catch((error) => res.status(400).json({ error }));
+					.then(() =>	{ res.status(200).json({ message: "Retrait du dislike pris en compte" })})   // 200 = Requête traitée avec succès.
+					.catch((error) => res.status(400).json({ error }));  									 // 400 = Syntaxe de la requête érronée.
 				}			
 			}
 	})
-	.catch((error) => res.status(400).json({ error }));
+	.catch((error) => res.status(400).json({ error }));														 // 400 = Syntaxe de la requête érronée.
 }
 
 // EN -- Sauce modification function. FR -- Fonction permettant la modification d'une sauce.

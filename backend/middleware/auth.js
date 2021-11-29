@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 
 /*----------------------------------MIDDLEWARE----------------------------------*/
 
-
 // Fonction vérifiant l'authentification de l'utilisateur avant execution d'une requête.
 module.exports = (req, res, next) => {
     try{
@@ -20,6 +19,6 @@ module.exports = (req, res, next) => {
         }
     }
     catch{
-        res.status(401).json({error: new Error('Invalid request!')});   // Si les instructions du try ne peuvent être executées, génération d'une erreur.
+        res.status(403).json({error: new Error('Requête invalide.')});  // 403 : Le serveur a compris la requête, mais refuse de l'exécuter.
     }
 };
