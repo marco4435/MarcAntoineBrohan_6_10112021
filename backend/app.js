@@ -1,13 +1,12 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
 // EN -- Node package importation. FR -- Importation des paquets Node.
-const dotenv = require('dotenv').config();        // Charge les fichiers .env.
 const express = require('express');               // Charge le framework Express.
 const helmet = require('helmet');                 // Défini l'entête HTTP.
 const mongoose = require('mongoose');             // Communication avec la base de données.
 const path = require('path');                     // Donne accès aux fichiers enregistrés localement.
 
-// EN -- Routes importation. FR -- Importation des routes.
+// EN -- Routes parameters import. FR -- Importation des paramètres des routes.
 const sauceRoutes = require('./routes/sauce_routes');
 const userRoutes = require('./routes/user_routes');
 
@@ -35,7 +34,7 @@ app.use(helmet());
 app.use(express.json());                                               // Extrait le corps JSON des requêtes venant du front end.
 app.use('/images', express.static(path.join(__dirname, 'images')));    // Enregistrement et renommage des images postées.
 
-// EN -- Route settings. FR -- Paramétrage des routes.
+// EN -- Route creation. FR -- Création des routes.
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 

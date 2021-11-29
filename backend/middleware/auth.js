@@ -2,12 +2,11 @@
 
 // EN -- Node package importation. FR -- Importation des paquets Node.
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv').config();
 
 /*----------------------------------MIDDLEWARE----------------------------------*/
 
 
-// Fonction vérifiant l'authentification de l'utilisateur avant envoi de la requête.
+// Fonction vérifiant l'authentification de l'utilisateur avant execution d'une requête.
 module.exports = (req, res, next) => {
     try{
         const token = req.headers.authorization.split(' ')[1];          // Récupération du token de la requête entrante.
