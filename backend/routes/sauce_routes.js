@@ -1,13 +1,11 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
-// Express importation.
+// EN -- Express importation. FR -- Importation d'Express.
 const express = require('express');
 const router = express.Router();
 
-// Controllers importation.
+// EN -- Middleware & Models importation. FR -- Importation des Middleware et des Modèles.
 const sauceCtrl = require('../controllers/sauce_controllers');
-
-// Middleware importation.
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 

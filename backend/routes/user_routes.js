@@ -1,14 +1,11 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
-// Express importation.
+// EN -- Express importation. FR -- Importation d'Express.
 const express = require('express');
 const router = express.Router();
 
-// Controllers importation.
+// EN -- Controllers importation. FR -- Importation des fonctions de contrôle.
 const userCtrl = require('../controllers/user_controllers');
-
-// Middleware importation.
-const password = require('../middleware/password');
 
 /*----------------------------------ROUTE SETTINGS----------------------------------*/
 

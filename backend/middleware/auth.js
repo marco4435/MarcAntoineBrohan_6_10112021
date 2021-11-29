@@ -1,10 +1,11 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
-// NPM importation.
+// EN -- Node package importation. FR -- Importation des paquets Node.
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 
 /*----------------------------------MIDDLEWARE----------------------------------*/
+
 
 // Fonction vérifiant l'authentification de l'utilisateur avant envoi de la requête.
 module.exports = (req, res, next) => {

@@ -1,6 +1,6 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
-// NPM importation.
+// EN -- Node package importation. FR -- Importation des paquets Node.
 const passwordValidator = require('password-validator');
 
 /*----------------------------------MIDDLEWARE----------------------------------*/

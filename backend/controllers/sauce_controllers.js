@@ -1,14 +1,14 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
-// NPM importation.
+// EN -- Node package importation. FR -- Importation des paquets Node.
 const fs = require('fs');
 
-// Models importation.
+// EN -- Models importation. FR -- Importation des Modèles.
 const Sauce = require('../models/sauce_models');
 
 /*----------------------------------CONTROLLERS----------------------------------*/
 
-// Create sauce.
+// EN -- Sauce creation function. FR -- Fonction permettant la création d'une sauce.
 exports.createSauce = (req, res, next) => {
 	const sauceObject = JSON.parse(req.body.sauce);
 	delete sauceObject._id;
@@ -22,7 +22,7 @@ exports.createSauce = (req, res, next) => {
 		.catch((error) => res.status(400).json({ error }));
 };
 
-// Like sauce.
+// EN -- Appreciation(like/dislike) sauce function. FR -- Fonction permettant l'appréciation(like/dislike) d'une sauce.
 exports.likeSauce = (req, res, next) => {
 	Sauce.findOne({ _id: req.params.id })
 		.then((sauce) => {
@@ -65,7 +65,7 @@ exports.likeSauce = (req, res, next) => {
 	.catch((error) => res.status(400).json({ error }));
 }
 
-// Modify sauce.
+// EN -- Sauce modification function. FR -- Fonction permettant la modification d'une sauce.
 exports.modifySauce = (req, res, next) => {
 	const sauceImage = req.file;
 	if(sauceImage){
@@ -90,7 +90,7 @@ exports.modifySauce = (req, res, next) => {
 	}
 };
 
-// Delete sauce.
+// EN -- Sauce delete function. FR -- Fonction permettant la suppression d'une sauce.
 exports.deleteSauce = (req, res, next) => {
 	Sauce.findOne({ _id: req.params.id })
 		.then((sauce) => {
@@ -104,14 +104,14 @@ exports.deleteSauce = (req, res, next) => {
 		.catch((error) => res.status(500).json({ error }));
 };
 
-// Get all sauce.
+// EN -- All sauces's selection function. FR -- Fonction permettant la sélection de toutes les sauces.
 exports.getAllSauce = (req, res, next) => {
 	Sauce.find()
 		.then((sauces) => res.status(200).json(sauces))
 		.catch((error) => res.status(400).json({ error }));
 };
 
-// Get one sauce.
+// EN -- One sauce selection function. FR -- Fonction permettant la sélection d'une sauce.
 exports.getOneSauce = (req, res, next) => {
 	Sauce.findOne({ _id: req.params.id })
 		.then((sauce) => res.status(200).json(sauce))

@@ -1,18 +1,16 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
-// NPM importation.
+// EN -- Node package importation. FR -- Importation des paquets Node.
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// Middleware importation.
+// EN -- Middleware & Models importation. FR -- Importation des Middleware et des Modèles.
 const passwordSchema = require("../middleware/password");
-
-// Models importation.
 const User = require('../models/user_models');
 
 /*----------------------------------CONTROLLERS----------------------------------*/
 
-// Fonction permettant l'enregistrement d'un utilisateur.
+// EN -- User registration function. FR -- Fonction permettant l'enregistrement d'un utilisateur.
 exports.signup = (req, res, next) => {
     let passwordIsClear = passwordSchema.validate(req.body.password);
     if(passwordIsClear){
@@ -34,7 +32,7 @@ exports.signup = (req, res, next) => {
     }
 }
 
-// Fonction login permettant la connexion d'un utilisateur.
+// EN -- User connection function. FR -- Fonction permettant la connexion d'un utilisateur.
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })                // Recherche dans la base de données d'un email identique à celui de la requête.
         .then(user => {
@@ -50,7 +48,7 @@ exports.login = (req, res, next) => {
                     userId: user._id,
                     token: jwt.sign(                       // Génération d'un token.
                     { userId: user._id },
-                    'MON TOKEN INTROUVABLE',                 // A modifier.
+                    'MON TOKEN INTROUVABLE',               // A modifier.
                     { expiresIn: '24h' }
                 )
                 });

@@ -1,26 +1,24 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
-// NPM importation.
-const dotenv = require('dotenv').config();
-const express = require('express');
-const helmet = require('helmet');
-const mongoose = require('mongoose');
-const path = require('path');
-const rateLimit = require('express-rate-limit');
+// EN -- Node package importation. FR -- Importation des paquets Node.
+const dotenv = require('dotenv').config();        // Charge les fichiers .env.
+const express = require('express');               // Charge le framework Express.
+const helmet = require('helmet');                 // Défini l'entête HTTP.
+const mongoose = require('mongoose');             // Communication avec la base de données.
+const path = require('path');                     // Donne accès aux fichiers enregistrés localement.
 
-// Routes importation.
+// EN -- Routes importation. FR -- Importation des routes.
 const sauceRoutes = require('./routes/sauce_routes');
 const userRoutes = require('./routes/user_routes');
 
 /*----------------------------------CONNECTION----------------------------------*/
 
-// Mongoose connection.
+// EN -- Mongoose connection. FR -- Connexion à Mongoose.
 mongoose.connect('mongodb+srv://marco4435:Y9YfpNw1roIIsl43@cluster0.dyfzt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     { useNewUrlParser: true,   // Fichier ENV à mettre dans le gitignore.
     useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
-
 const app = express();
 
 // CORS
@@ -31,15 +29,13 @@ app.use((req, res, next) => {
     next();
 });
 
-// Number of request limited to 100 per minute.
-const limiter = rateLimit({ windowMs: 1 * 60 * 1000, max: 100 });
-
 /*----------------------------------APP----------------------------------*/
 
 app.use(helmet());
-app.use(express.json());
-app.use(limiter);
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(express.json());                                               // Extrait le corps JSON des requêtes venant du front end.
+app.use('/images', express.static(path.join(__dirname, 'images')));    // Enregistrement et renommage des images postées.
+
+// EN -- Route settings. FR -- Paramétrage des routes.
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
