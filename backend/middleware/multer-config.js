@@ -1,7 +1,11 @@
-// Importation de multer.
+/*----------------------------------REQUIRED----------------------------------*/
+
+// NPM importation.
 const multer = require('multer');
 
-// Bibliothèque de mime_types.
+/*----------------------------------MIDDLEWARE----------------------------------*/
+
+// Mime_types library.
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
@@ -20,5 +24,4 @@ const storage = multer.diskStorage({
     }
 });
 
-// Exportation des fichiers image.
 module.exports = multer({storage: storage}).single('image');
