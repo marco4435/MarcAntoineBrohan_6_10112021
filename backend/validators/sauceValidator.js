@@ -26,8 +26,9 @@ exports.postInput = (req, res, next) => {
 
 // PUT.
 exports.modifyInput = (req, res, next) => {
+    let sauceToCheck;
     if(!req.file){                                                        // En l'absence d'image à modifier.
-        let sauceToCheck = new Validator(req.body, {                      // Vérifier toute la requête.
+            sauceToCheck = new Validator(req.body, {                      // Vérifier toute la requête.
             name: 'required|minLength:3|string',
             manufacturer: 'required|minLength:3|string',
             description: 'required|minLength:3|string',
@@ -35,7 +36,7 @@ exports.modifyInput = (req, res, next) => {
         });
     }
     else{
-        let sauceToCheck = new Validator(JSON.parse(req.body.sauce), {    // S'il y a une image à modifier, vérifier uniquement le texte.
+            sauceToCheck = new Validator(JSON.parse(req.body.sauce), {    // S'il y a une image à modifier, vérifier uniquement le texte.
             name: 'required|minLength:3|string',
             manufacturer: 'required|minLength:3|string',
             description: 'required|minLength:3|string',
