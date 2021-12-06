@@ -7,16 +7,14 @@ const mongoose = require('mongoose');             // Communication avec la base 
 const path = require('path');                     // Donne accès aux fichiers enregistrés localement.
 
 // EN -- Routes parameters import. FR -- Importation des paramètres des routes.
-const sauceRoutes = require('./routes/sauce_routes');
-const userRoutes = require('./routes/user_routes');
+const sauceRoutes = require('./routes/sauceRoutes');
+const userRoutes = require('./routes/userRoutes');
 const key_mongoose = require('./hidden.js');
 
 /*----------------------------------CONNECTION----------------------------------*/
 
 // EN -- Mongoose connection. FR -- Connexion à Mongoose.
-mongoose.connect(key_mongoose,
-    { useNewUrlParser: true,   // Fichier ENV à mettre dans le gitignore.
-    useUnifiedTopology: true })
+mongoose.connect(key_mongoose, { useNewUrlParser: true, useUnifiedTopology: true })// Fichier ENV à mettre dans le gitignore.
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 const app = express();

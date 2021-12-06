@@ -5,9 +5,9 @@ const express = require('express');
 const router = express.Router();
 
 // EN -- Controllers importation. FR -- Importation des fonctions de contrôle.
-const userCtrl = require('../controllers/user_controllers');
+const userCtrl = require('../controllers/userControllers');
 
-/*----------------------------------ROUTE SETTINGS----------------------------------*/
+/*----------------------------------ROUTES SETTINGS----------------------------------*/
 
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);

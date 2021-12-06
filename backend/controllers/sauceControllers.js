@@ -4,7 +4,7 @@
 const fs = require('fs');
 
 // EN -- Models importation. FR -- Importation des Modèles.
-const Sauce = require('../models/sauce_models');
+const Sauce = require('../models/sauceModels');
 
 /*----------------------------------CONTROLLERS----------------------------------*/
 
@@ -47,7 +47,6 @@ exports.likeSauce = (req, res, next) => {
 						.then(() =>	{ res.status(200).json({ message: "Dislike pris en compte" })})  		 // 200 = Requête traitée avec succès.
 						.catch((error) => res.status(400).json({ error }));  						 		 // 400 = Syntaxe de la requête érronée.
 			}
-
 			if(like === 0) {             // L'utilisateur annule son like ou son dislike.
 				if(userResetLike) {		 // Si l'utilisateur avait déjà liké.									
 					Sauce.updateOne( { _id : sauceId }, { $inc: { likes: -1 }, $pull: { usersLiked : userId } ,} )

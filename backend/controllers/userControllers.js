@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 // EN -- Middleware & Models & Constant importation. FR -- Importation des Middleware, des Modèles et des constantes.
 const passwordSchema = require("../middleware/password");
-const User = require('../models/user_models');
+const User = require('../models/userModels');
 const token_password = require('../hidden');
 
 /*----------------------------------CONTROLLERS----------------------------------*/
@@ -15,21 +15,17 @@ const token_password = require('../hidden');
 exports.signup = (req, res, next) => {
     let passwordIsClear = passwordSchema.validate(req.body.password);
     if(passwordIsClear){
-        bcrypt.hash(req.body.password, 10)   // Hachage du mot de passe - Salage de 10 répétitions.
+        bcrypt.hash(req.body.password, 10)        // Hachage du mot de passe - Salage de 10 répétitions.
         .then(hash => {
-            const user = new User({          // Enregistrement des données saisies dans une constante.
-                email: req.body.email,
-                password: hash
-        });
-        user.save()                          // Enregistrement dans la base de données.
+            const user = new User({ email: req.body.email, password: hash, });   // Enregistrement des données saisies dans une constante.
+            user.save()                           // Enregistrement dans la base de données.
             .then(() => res.status(201).json({ message: 'Utilisateur créé.' }))   // 201 = Requête traitée avec succès et création d'un document.
             .catch(error => res.status(400).json({ error }));                     // 400 = Syntaxe de la requête érronée.
         })
         .catch(error => res.status(500).json({ error }));                         // 500 = Erreur serveur.
     }
     else{
-        let errorMessage = "Le mot de passe doit comporter au minimum 5 caractères, 1 majuscule, 1 minuscule, 2 chiffres et ne pas comporter d'espace."
-        return res.status(400).json({ error: new Error(errorMessage)});   // 400 = Syntaxe de la requête érronée.
+        return res.status(400).json({ error });   // 400 = Syntaxe de la requête érronée.
     }
 }
 

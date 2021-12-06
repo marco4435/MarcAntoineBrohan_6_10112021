@@ -8,7 +8,7 @@ const token_password = require('../hidden');
 
 /*----------------------------------MIDDLEWARE----------------------------------*/
 
-// Fonction vérifiant l'authentification de l'utilisateur avant execution d'une requête.
+// EN -- Function verifying user authentication before executing a request. FR -- Fonction vérifiant l'authentification de l'utilisateur avant execution d'une requête.
 module.exports = (req, res, next) => {
     try{
         const token = req.headers.authorization.split(' ')[1];          // Récupération du token de la requête entrante.

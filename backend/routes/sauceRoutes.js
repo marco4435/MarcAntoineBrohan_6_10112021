@@ -5,9 +5,9 @@ const express = require('express');
 const router = express.Router();
 
 // EN -- Middleware & Models importation. FR -- Importation des Middleware et des Modèles.
-const sauceCtrl = require('../controllers/sauce_controllers');
+const sauceCtrl = require('../controllers/sauceControllers');
 const auth = require('../middleware/auth');
-const multer = require('../middleware/multer-config');
+const multer = require('../middleware/multer');
 
 /*----------------------------------ROUTE SETTINGS----------------------------------*/
 
