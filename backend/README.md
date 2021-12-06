@@ -12,7 +12,7 @@ npm install bcrypt
 npm install jsonwebtoken 
 npm install multer
 npm install --save path
-npm install helmet –save
+npm install helmet -–save
 npm install file-system --save
 npm install --save express-rate-limit
 npm install password-validator
