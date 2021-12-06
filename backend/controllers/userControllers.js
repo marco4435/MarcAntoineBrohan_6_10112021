@@ -1,8 +1,8 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
 // EN -- Node package importation. FR -- Importation des paquets Node.
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');               // Permet de crypter un mot de passe et de comparer des mots de passe cryptés.
+const jwt = require('jsonwebtoken');            // Permet qu'un utilisateur ne puisse se connecter qu'une seule fois à son compte.
 const validatorEmail = require('validator');
 
 // EN -- Middleware & Models & Constant importation. FR -- Importation des Middleware, des Modèles et des constantes.
