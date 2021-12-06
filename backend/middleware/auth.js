@@ -1,10 +1,8 @@
 /*----------------------------------REQUIRED----------------------------------*/
 
 // EN -- Node package importation. FR -- Importation des paquets Node.
-const jwt = require('jsonwebtoken');
-
-// EN -- Import of a constant. FR -- Importation d'une constante.
-const token_password = require('../hidden');
+const jwt = require('jsonwebtoken');              // Permet l'utilisation des token d'authentification.
+const dotenv = require('dotenv').config();        // Permet l'utilisation du fichier .env.
 
 /*----------------------------------MIDDLEWARE----------------------------------*/
 
@@ -12,7 +10,7 @@ const token_password = require('../hidden');
 module.exports = (req, res, next) => {
     try{
         const token = req.headers.authorization.split(' ')[1];          // Récupération du token de la requête entrante.
-        const decodedToken = jwt.verify(token, token_password);         // Vérification du format du token.
+        const decodedToken = jwt.verify(token, process.env.PASSWORD_TOKEN);         // Vérification du format du token.
         const userId = decodedToken.userId;                             // Extraction de l'ID utilisateur.
         if(req.body.userId && req.body.userId !== userId){              // Si la demande contient un ID utilisateur, on le compare à celui de la requête entrante.
             throw 'Invalid user ID';                                    // S'ils sont différents, génération d'une erreur.

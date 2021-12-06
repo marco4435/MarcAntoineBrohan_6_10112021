@@ -8,10 +8,11 @@ const router = express.Router();
 const sauceCtrl = require('../controllers/sauceControllers');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer');
+const inputValidator = require("../validators/sauceValidator");
 
 /*----------------------------------ROUTE SETTINGS----------------------------------*/
 
-router.post("/", auth, multer, sauceCtrl.createSauce);
+router.post("/", auth, multer, inputValidator.postInput, sauceCtrl.createSauce);
 router.post('/:id/like', auth, sauceCtrl.likeSauce);
 router.put("/:id", auth, multer, sauceCtrl.modifySauce);
 router.delete("/:id", auth, sauceCtrl.deleteSauce);

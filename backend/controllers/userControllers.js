@@ -3,18 +3,19 @@
 // EN -- Node package importation. FR -- Importation des paquets Node.
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const validatorEmail = require('validator');
 
 // EN -- Middleware & Models & Constant importation. FR -- Importation des Middleware, des Modèles et des constantes.
-const passwordSchema = require("../middleware/password");
-const User = require('../models/userModels');
-const token_password = require('../hidden');
+const passwordSchema = require("../validators/passwordValidator");
+const User = require('../models/userModels'); 
 
 /*----------------------------------CONTROLLERS----------------------------------*/
 
 // EN -- User registration function. FR -- Fonction permettant l'enregistrement d'un utilisateur.
 exports.signup = (req, res, next) => {
+    let emailIsClear = validatorEmail.isEmail(req.body.email);
     let passwordIsClear = passwordSchema.validate(req.body.password);
-    if(passwordIsClear){
+    if(emailIsClear && passwordIsClear){
         bcrypt.hash(req.body.password, 10)        // Hachage du mot de passe - Salage de 10 répétitions.
         .then(hash => {
             const user = new User({ email: req.body.email, password: hash, });   // Enregistrement des données saisies dans une constante.
@@ -45,7 +46,7 @@ exports.login = (req, res, next) => {
                 userId: user._id,
                 token: jwt.sign(
                 { userId: user._id },
-                token_password,               
+                process.env.PASSWORD_TOKEN,               
                 { expiresIn: '24h' }
             )
             });

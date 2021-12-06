@@ -18,9 +18,9 @@ const storage = multer.diskStorage({
         callback(null, 'images');
     },
     filename: (req, file, callback) => {                      // Paramétrage du nom du fichier.
-        const name = file.originalname.split(' ').join('_');  // Modification du nom du fichier.
-        const extension = MIME_TYPES[file.mimetype];          // Modification de l'extensiondu du fichier.
-        callback(null, name + Date.now() + '.' + extension);
+        const name = file.originalname.split('.')[0];         // Modification du nom du fichier.
+        const extension = MIME_TYPES[file.mimetype];          // Modification de l'extension du fichier.O
+        callback(null, name + '.' + Date.now() + '.' + extension);
     }
 });
 
