@@ -19,6 +19,7 @@ npm install file-system --save
 npm install --save express-rate-limit
 npm install password-validator
 npm install node-input-validator
+npm install validator
 
 4 – Depuis un terminal et depuis le dossier backend, utilisez la commande Nodemon. L’API se lance et est utilisable par le frontend.
 
