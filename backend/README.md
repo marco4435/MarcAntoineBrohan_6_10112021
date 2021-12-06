@@ -16,5 +16,6 @@ npm install helmet –save
 npm install file-system --save
 npm install --save express-rate-limit
 npm install password-validator
+npm install node-input-validator
 4 – Depuis un terminal et depuis le dossier backend, utilisez la commande Nodemon. L’API se lance et est utilisable par le frontend.
 5 - Dans le navigateur, stoppez l'action d'un éventuel bloqueur de publicité car cela empêche le fonctionnement de l'API.

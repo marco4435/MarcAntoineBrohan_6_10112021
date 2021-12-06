@@ -15,11 +15,11 @@ exports.postInput = (req, res, next) => {
     });
     sauceToCheck.check()
         .then((matched) => {
-            if(!matched) {                                                // Si le contrôle est négatif, réponse 400 (Syntaxe de la requête érronée).
+            if(!matched) {                                               // Si le contrôle est négatif, réponse 400 (Syntaxe de la requête érronée).
                 res.status(400).json({ error });
             }
             else{
-                next();                                                   // Si le contrôle est positif, passage à la prochaine ligne d'instruction.
+                next();                                                  // Si le contrôle est positif, passage à la prochaine ligne d'instruction.
             }
         });						              
 }

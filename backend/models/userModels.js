@@ -13,6 +13,6 @@ const userSchema = mongoose.Schema({
 });
 
 // EN -- Provided information pre-validation. FR -- Pré-validation des informations renseignées.
-userSchema.plugin(uniqueValidator); // Question
+userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema);
