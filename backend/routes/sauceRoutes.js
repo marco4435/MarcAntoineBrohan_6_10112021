@@ -12,9 +12,9 @@ const inputValidator = require("../validators/sauceValidator");
 
 /*----------------------------------ROUTE SETTINGS----------------------------------*/
 
-router.post("/", auth, multer, inputValidator.postInput, sauceCtrl.createSauce);
+router.post("/", auth, multer, inputValidator.checkSauceInput, sauceCtrl.createSauce);
 router.post('/:id/like', auth, sauceCtrl.likeSauce);
-router.put("/:id", auth, multer, inputValidator.modifyInput, sauceCtrl.modifySauce);
+router.put("/:id", auth, multer, inputValidator.checkSauceInput, sauceCtrl.modifySauce);
 router.delete("/:id", auth, sauceCtrl.deleteSauce);
 router.get("/", auth, sauceCtrl.getAllSauce);
 router.get("/:id", auth, sauceCtrl.getOneSauce);
