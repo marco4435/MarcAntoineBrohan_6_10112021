@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // EN -- Limit each IP adress to 100 request per minute. FR -- Limite chaque adresse IP à 100 requêtes par minute.
-const limiter = rateLimit({windowMs: 1 * 60 * 1000, max: 100});        
+const limiter = rateLimit({windowMs: 10 * 60 * 1000, max: 3});        
                                 
 /*----------------------------------APP----------------------------------*/
 
